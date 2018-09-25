@@ -14,19 +14,19 @@ Cách tiếp cận DbC giả định tất cả các thành phần máy khách g
 
 ## Nội dung
 
-Ý tưởng trung tâm của DbC là một phép ẩn dụ về cách các yếu tố của một hệ thống phần mềm cộng tác với nhau trên cơ sở các nghĩa vụ và lợi ích lẫn nhau. Ẩn dụ xuất phát từ cuộc sống công việc, nơi “khách hàng” và “nhà cung cấp” đồng ý với “hợp đồng” xác định, ví dụ:
-* Nhà cung cấp phải cung cấp một sản phẩm nhất định (nghĩa vụ) và được cho rằng khách hàng đã thanh toán phí (lợi ích) của mình.
+Ý tưởng trung tâm của DbC là một phép ẩn dụ về cách các yếu tố của một hệ thống phần mềm cộng tác với nhau trên cơ sở các nghĩa vụ và lợi ích chung. Ẩn dụ xuất phát từ cuộc sống công việc, nơi “khách hàng” và “nhà cung cấp” đồng ý với “hợp đồng” xác định, ví dụ:
+* Nhà cung cấp phải cung cấp một sản phẩm nhất định (nghĩa vụ) và hi vọng khách hàng đã thanh toán phí (lợi ích) của mình.
 * Khách hàng phải trả phí (nghĩa vụ) và được quyền nhận sản phẩm (lợi ích).
 * Cả hai bên phải đáp ứng các nghĩa vụ nhất định, chẳng hạn như luật và quy định, áp dụng cho tất cả các hợp đồng.
 
 
-Tương tự, nếu một thường trình từ một lớp trong lập trình hướng đối tượng cung cấp một chức năng nhất định, nó có thể:
+Tương tự, nếu một đoạn chương trình từ một lớp trong lập trình hướng đối tượng cung cấp một chức năng nhất định, nó có thể:
 
-* Mong đợi một điều kiện nhất định được đảm bảo khi nhập vào bởi bất kỳ mô-đun khách hàng nào gọi nó: điều kiện tiên quyết của thường lệ - nghĩa vụ cho khách hàng và lợi ích cho nhà cung cấp (bản thân thường trình), vì nó giải phóng nó khỏi phải xử lý các trường hợp bên ngoài điều kiện tiên quyết.
-* Đảm bảo một tài sản nhất định về xuất cảnh: điều kiện của thường lệ — một nghĩa vụ đối với nhà cung cấp, và rõ ràng là một lợi ích (lợi ích chính của việc gọi thường trình) cho khách hàng.
-* Duy trì một tài sản nhất định, giả định về nhập cảnh và được bảo đảm khi thoát: lớp bất biến.
+* Mong đợi một điều kiện nhất định được đảm bảo khi nhập vào bởi bất kỳ mô-đun khách hàng nào gọi nó: điều kiện tiên quyết của đoạn ct đó - nghĩa vụ cho khách hàng và lợi ích cho nhà cung cấp (là chính nó), vì nó giải phóng nó khỏi phải xử lý các trường hợp bên ngoài điều kiện tiên quyết.
+* Đảm bảo một thuộc tính nhất định về xuất cảnh: điều kiện của thường lệ — một nghĩa vụ đối với nhà cung cấp, và rõ ràng là một lợi ích (lợi ích chính của việc gọi thường trình) cho khách hàng.
+* Duy trì một tài sản nhất định, giả định về đầu vào và được bảo đảm khi thoát: lớp bất biến.
 
-Hợp đồng này tương đương về mặt ngữ nghĩa với một cái ba của Hoare, hình thức hóa các nghĩa vụ. Điều này có thể được tóm tắt bằng "ba câu hỏi" mà nhà thiết kế phải nhiều lần trả lời trong hợp đồng:
+Hợp đồng này tương đương về mặt ngữ nghĩa với một luật Hoare triple,  hình thức hóa các nghĩa vụ. Điều này có thể được tóm tắt bằng "ba câu hỏi" mà nhà thiết kế phải nhiều lần trả lời trong hợp đồng:
 
 * Hợp đồng kỳ vọng là gì?
 * Bảo đảm hợp đồng là gì?
@@ -47,23 +47,23 @@ Khái niệm về hợp đồng kéo dài xuống mức phương thức / thủ 
 
 Các lớp con trong một hệ thống phân cấp thừa kế được phép làm suy yếu các điều kiện tiên quyết (nhưng không tăng cường chúng) và tăng cường các điều kiện và bất biến (nhưng không làm suy yếu chúng). Những quy tắc này gần đúng về phân loại hành vi.
 
-Tất cả các mối quan hệ lớp nằm giữa giữa các lớp khách hàng và các lớp nhà cung cấp. Một lớp khách hàng có nghĩa vụ thực hiện các cuộc gọi đến các tính năng của nhà cung cấp, nơi trạng thái kết quả của nhà cung cấp không bị vi phạm bởi cuộc gọi của khách hàng. Sau đó, nhà cung cấp có nghĩa vụ cung cấp trạng thái trả lại và dữ liệu không vi phạm các yêu cầu của tiểu bang của khách hàng. Ví dụ, bộ đệm dữ liệu của nhà cung cấp có thể yêu cầu dữ liệu đó có trong bộ đệm khi một tính năng xóa được gọi. Sau đó, nhà cung cấp đảm bảo cho khách hàng rằng khi một tính năng xóa kết thúc công việc của nó, mục dữ liệu sẽ, thực sự, sẽ bị xóa khỏi bộ đệm. Các hợp đồng thiết kế khác là các khái niệm về “bất biến lớp”. Lớp bảo đảm bất biến (đối với lớp địa phương) rằng trạng thái của lớp sẽ được duy trì trong các dung sai được chỉ định ở cuối mỗi thực thi tính năng.
+Tất cả các mối quan hệ lớp nằm giữa giữa các lớp khách và các lớp nhà cung cấp. Một lớp khách có nghĩa vụ thực hiện các cuộc gọi đến các tính năng của nhà cung cấp, nơi trạng thái kết quả của nhà cung cấp không bị vi phạm bởi cuộc gọi của khách hàng. Sau đó, nhà cung cấp có nghĩa vụ cung cấp trạng thái trả lại và dữ liệu không vi phạm các yêu cầu của tiểu bang của khách hàng. Ví dụ, bộ đệm dữ liệu của nhà cung cấp có thể yêu cầu dữ liệu đó có trong bộ đệm khi một tính năng xóa được gọi. Sau đó, nhà cung cấp đảm bảo cho khách hàng rằng khi một tính năng xóa kết thúc công việc của nó, mục dữ liệu sẽ thực sự bị xóa khỏi bộ đệm. Các hợp đồng thiết kế khác là các khái niệm về “bất biến lớp”. Lớp bảo đảm bất biến (đối với lớp địa phương) rằng trạng thái của lớp sẽ được duy trì trong các dung sai được chỉ định ở cuối mỗi thực thi tính năng.
 
 Khi sử dụng hợp đồng, nhà cung cấp không nên cố gắng xác minh rằng các điều kiện hợp đồng được thỏa mãn; ý tưởng chung là mã nên "thất bại", với xác minh hợp đồng là mạng lưới an toàn. Tài sản "không cứng" của DbC đơn giản hoá việc gỡ rối hành vi hợp đồng, vì hành vi dự định của từng thói quen được xác định rõ ràng. Điều này phân biệt nó rõ ràng từ một thực hành liên quan được gọi là lập trình phòng thủ, nơi mà các nhà cung cấp chịu trách nhiệm cho việc tìm ra phải làm gì khi một điều kiện tiên quyết bị phá vỡ. Thường xuyên hơn không, nhà cung cấp ném một ngoại lệ để thông báo cho khách hàng rằng điều kiện tiên quyết đã bị phá vỡ, và trong cả hai trường hợp - DbC và lập trình phòng thủ — khách hàng phải tìm ra cách để đáp ứng điều đó. DbC giúp công việc của nhà cung cấp dễ dàng hơn.
 
 Thiết kế theo hợp đồng cũng xác định tiêu chí cho tính chính xác cho một module phần mềm:
 
 * Nếu lớp bất biến và điều kiện tiên quyết là đúng trước khi một nhà cung cấp được gọi bởi một máy khách, thì sự bất biến và điều kiện sau sẽ là đúng sau khi dịch vụ đã được hoàn thành.
-* Khi thực hiện cuộc gọi đến nhà cung cấp, mô-đun phần mềm không được vi phạm các điều kiện tiên quyết của nhà cung cấp.
+* Khi thực hiện lời gọi đến nhà cung cấp, mô-đun phần mềm không được vi phạm các điều kiện tiên quyết của nhà cung cấp.
 
 Thiết kế theo hợp đồng cũng có thể tạo điều kiện tái sử dụng mã, vì hợp đồng cho từng đoạn mã được ghi chép đầy đủ. Các hợp đồng cho một mô-đun có thể được coi là một dạng tài liệu phần mềm cho hành vi của mô-đun đó.
 
 Các điều kiện hợp đồng sẽ không bao giờ bị vi phạm trong khi thực hiện chương trình không có lỗi. Các hợp đồng do đó thường chỉ được kiểm tra trong chế độ gỡ lỗi trong quá trình phát triển phần mềm. Sau khi phát hành, kiểm tra hợp đồng bị vô hiệu hóa để tối đa hóa hiệu suất.
 
-Trong nhiều ngôn ngữ lập trình, hợp đồng thực  hiện với khẳng định.Asserts được mặc định biên dịch trong chế độ phát hành trong C / C ++, và tương tự như ngừng hoạt động trong C # [8] 27 và Java. Điều này có hiệu quả loại bỏ các chi phí thời gian chạy của hợp đồng phát hành.
+Trong nhiều ngôn ngữ lập trình, hợp đồng thực  hiện với các assert.Asserts được mặc định biên dịch trong chế độ phát hành trong C / C ++, và tương tự như ngừng hoạt động trong C # [8] 27 và Java. Điều này có hiệu quả loại bỏ các chi phí thời gian chạy của hợp đồng phát hành.
 
 Thiết kế theo hợp đồng không thay thế các chiến lược thử nghiệm thường xuyên, chẳng hạn như thử nghiệm đơn vị, thử nghiệm tích hợp và kiểm tra hệ thống. Thay vào đó, nó bổ sung cho thử nghiệm bên ngoài với các phép kiểm thử nội bộ có thể được kích hoạt cho cả các thử nghiệm riêng biệt và trong mã sản xuất trong giai đoạn thử nghiệm. Lợi thế của tự kiểm tra nội bộ là chúng có thể phát hiện lỗi trước khi chúng tự biểu hiện dưới dạng kết quả không hợp lệ được khách hàng quan sát. Điều này dẫn đến phát hiện lỗi sớm hơn và cụ thể hơn. 
 
-Việc sử dụng các xác nhận có thể được coi là một hình thức kiểm tra oracle, một cách để kiểm tra thiết kế bằng cách thực hiện hợp đồng.
+Việc sử dụng các assert có thể được coi là một hình thức kiểm tra oracle, một cách để kiểm tra thiết kế bằng cách thực hiện hợp đồng.
 
  
