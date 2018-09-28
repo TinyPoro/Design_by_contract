@@ -8,7 +8,7 @@
 
 1 kế hoạch thiết kế bằng contract
 
-*Design bằng contract* (*DbC*), còn được biết là *contract programming*, *programming by contract* và *design-by-contract programming*, là 1 hướng tiếp cận để thiết kế phần mềm. Nó quy định rằng các nhà thiết kế phần mềm nên khai báo các đặc tả interface 1 cách chính quý, tóm lượng và dễ kiểm tra đối với các thành phần phần mềm, nhằm mở rộng các định nghĩa thông thường của các loại dữ liệu trừu tượng  với điều kiện  trước, điều kiện sau và bất biến. Những đặc tả này được gọi là "contract", phù hợp với một ẩn dụ khái niệm với các điều kiện và nghĩa vụ của  các contract công việc.
+*Design bằng contract* (*DbC*), còn được biết là *contract programming*, *programming by contract* và *design-by-contract programming*, là 1 hướng tiếp cận để thiết kế phần mềm. Nó quy định rằng các nhà thiết kế phần mềm nên khai báo các đặc tả interface 1 cách chính quy, tóm lượng và dễ kiểm tra đối với các thành phần phần mềm, nhằm mở rộng các định nghĩa thông thường của các loại dữ liệu trừu tượng  với điều kiện  trước, điều kiện sau và bất biến. Những đặc tả này được gọi là "contract", phù hợp với một ẩn dụ khái niệm với các điều kiện và nghĩa vụ của  các contract công việc.
 
 Cách tiếp cận DbC giả định tất cả các thành phần máy khách gọi một hoạt động trên một thành phần máy chủ sẽ đáp ứng các điều kiện tiên quyết được xác định theo yêu cầu cho hoạt động đó. Trường hợp giả định này được coi là quá rủi ro (như trong máy chủ đa kênh hoặc máy tính phân tán), phương pháp "thiết kế phòng thủ" ngược lại được thực hiện, nghĩa là kiểm tra thành phần máy chủ (trước hoặc trong khi xử lý yêu cầu của khách hàng). đúng, và trả lời với một thông báo lỗi phù hợp nếu không.
 
@@ -22,9 +22,9 @@ Cách tiếp cận DbC giả định tất cả các thành phần máy khách g
 
 Tương tự, nếu một đoạn chương trình từ một lớp trong lập trình hướng đối tượng cung cấp một chức năng nhất định, nó có thể:
 
-* Mong đợi một điều kiện nhất định được đảm bảo khi nhập vào bởi bất kỳ mô-đun khách hàng nào gọi nó: điều kiện tiên quyết của đoạn ct đó - nghĩa vụ cho khách hàng và lợi ích cho nhà cung cấp (là chính nó), vì nó giải phóng nó khỏi phải xử lý các trường hợp bên ngoài điều kiện tiên quyết.
-* Đảm bảo một thuộc tính nhất định về xuất cảnh: điều kiện của thường lệ — một nghĩa vụ đối với nhà cung cấp, và rõ ràng là một lợi ích (lợi ích chính của việc gọi thường trình) cho khách hàng.
-* Duy trì một tài sản nhất định, giả định về đầu vào và được bảo đảm khi thoát: lớp bất biến.
+* Mong đợi một điều kiện nhất định được đảm bảo khi nhập vào bởi bất kỳ mô-đun khách hàng nào gọi nó: điều kiện tiên quyết của đoạn chương trình đó - nghĩa vụ cho khách hàng và lợi ích cho nhà cung cấp (là chính nó), vì nó giải phóng nó khỏi phải xử lý các trường hợp bên ngoài điều kiện tiên quyết.
+* Đảm bảo một thuộc tính nhất định khi kết thúc: điều kiện của thường lệ — một nghĩa vụ đối với nhà cung cấp, và rõ ràng là một lợi ích (lợi ích chính của việc gọi thường trình) cho khách hàng.
+* Duy trì một thuộc tính nhất định, giả định về đầu vào và được bảo đảm khi thoát: lớp bất biến.
 
 Hợp đồng này tương đương về mặt ngữ nghĩa với một luật Hoare triple,  hình thức hóa các nghĩa vụ. Điều này có thể được tóm tắt bằng "ba câu hỏi" mà nhà thiết kế phải nhiều lần trả lời trong hợp đồng:
 
